@@ -23,7 +23,7 @@ typedef NS_ENUM(NSUInteger, MMPopupType) {
 typedef void(^MMPopupBlock)(MMPopupView *);
 typedef void(^MMPopupCompletionBlock)(MMPopupView *, BOOL);
 
-@interface MMPopupView : UIView
+@interface MMPopupView : UIView<MMPopupWindowWildToHideProtocol>
 
 @property (nonatomic, assign, readonly) BOOL           visible;             // default is NO.
 

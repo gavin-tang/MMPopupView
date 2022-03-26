@@ -35,7 +35,7 @@
     MMAlertViewConfig *config = [MMAlertViewConfig globalConfig];
     
     NSArray *items =@[
-                      MMItemMake(config.defaultTextCancel, MMItemTypeHighlight, nil),
+                      MMItemMake(config.defaultTextCancel, MMItemTypeNormal, nil),
                       MMItemMake(config.defaultTextConfirm, MMItemTypeHighlight, nil)
                       ];
     return [self initWithTitle:title detail:detail items:items inputPlaceholder:inputPlaceholder inputHandler:inputHandler];
@@ -229,6 +229,9 @@
             make.bottom.equalTo(self.buttonView.mas_bottom);
             
         }];
+        
+        //默认屏蔽点击空白消失
+        [[MMPopupWindow sharedWindow] setTouchWildToHide:NO];
     }
     
     
@@ -354,7 +357,7 @@
         self.backgroundColor    = MMHexColor(0xFFFFFFFF);
         self.titleColor         = MMHexColor(0x333333FF);
         self.detailColor        = MMHexColor(0x333333FF);
-        self.splitColor         = MMHexColor(0xCCCCCCFF);
+        self.splitColor         = MMHexColor(0xE7E7E7FF);
 
         self.itemNormalColor    = MMHexColor(0x333333FF);
         self.itemHighlightColor = MMHexColor(0xE76153FF);

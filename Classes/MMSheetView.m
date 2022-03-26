@@ -132,9 +132,27 @@
         [self.cancelButton setTitle:config.defaultTextCancel forState:UIControlStateNormal];
         [self.cancelButton setTitleColor:config.itemNormalColor forState:UIControlStateNormal];
         
-        [self mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.bottom.equalTo(self.cancelButton.mas_bottom);
+        
+        //美化iPhone X
+        CGFloat height = MM_IS_IPHONE_X ? 33 : 0;
+        
+        UIView *extraView = [[UIView alloc] init];
+        extraView.backgroundColor = config.backgroundColor;
+        extraView.clipsToBounds = YES;
+        [self addSubview:extraView];
+        [extraView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.cancelButton.mas_bottom).offset(MM_SPLIT_WIDTH);
+            make.left.right.mas_equalTo(self);
+            make.height.mas_equalTo(height);
         }];
+        
+        
+        [self mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.bottom.equalTo(extraView.mas_bottom);
+        }];
+        
+        //默认点击空白消失
+        [[MMPopupWindow sharedWindow] setTouchWildToHide:YES];
         
     }
     
@@ -195,7 +213,7 @@
         
         self.backgroundColor    = MMHexColor(0xFFFFFFFF);
         self.titleColor         = MMHexColor(0x666666FF);
-        self.splitColor         = MMHexColor(0xCCCCCCFF);
+        self.splitColor         = MMHexColor(0xE7E7E7FF);
         
         self.itemNormalColor    = MMHexColor(0x333333FF);
         self.itemDisableColor   = MMHexColor(0xCCCCCCFF);
