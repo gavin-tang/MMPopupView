@@ -63,7 +63,7 @@
             }];
             self.titleLabel.textColor = config.titleColor;
             self.titleLabel.font = [UIFont systemFontOfSize:config.titleFontSize];
-            self.titleLabel.textAlignment = NSTextAlignmentCenter;
+            self.titleLabel.textAlignment = config.textAlignment;
             self.titleLabel.numberOfLines = 0;
             self.titleLabel.text = title;
             
@@ -89,7 +89,7 @@
             
             [btn mas_makeConstraints:^(MASConstraintMaker *make) {
                 
-                make.left.right.equalTo(self.buttonView).insets(UIEdgeInsetsMake(0, -MM_SPLIT_WIDTH, 0, -MM_SPLIT_WIDTH));
+                make.left.right.equalTo(self.buttonView).insets(UIEdgeInsetsMake(0, config.innerMargin, 0, config.innerMargin));
                 make.height.mas_equalTo(config.buttonHeight);
                 
                 if ( !firstButton )
@@ -114,6 +114,8 @@
             btn.layer.borderWidth = MM_SPLIT_WIDTH;
             btn.layer.borderColor = config.splitColor.CGColor;
             btn.enabled = !item.disabled;
+            [btn setContentHorizontalAlignment:config.horizontalAlignment];
+            [btn setContentVerticalAlignment:config.verticalAlignment];
         }
         [lastButton mas_updateConstraints:^(MASConstraintMaker *make) {
             make.bottom.equalTo(self.buttonView.mas_bottom).offset(MM_SPLIT_WIDTH);
@@ -122,7 +124,8 @@
         self.cancelButton = [UIButton mm_buttonWithTarget:self action:@selector(actionCancel)];
         [self addSubview:self.cancelButton];
         [self.cancelButton mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.equalTo(self.buttonView);
+            make.left.equalTo(self.buttonView).offset(config.innerMargin);
+            make.right.equalTo(self.buttonView);
             make.height.mas_equalTo(config.buttonHeight);
             make.top.equalTo(self.buttonView.mas_bottom).offset(8);
         }];
@@ -131,7 +134,9 @@
         [self.cancelButton setBackgroundImage:[UIImage mm_imageWithColor:config.itemPressedColor] forState:UIControlStateHighlighted];
         [self.cancelButton setTitle:config.defaultTextCancel forState:UIControlStateNormal];
         [self.cancelButton setTitleColor:config.itemNormalColor forState:UIControlStateNormal];
-        
+        [self.cancelButton setContentHorizontalAlignment:config.horizontalAlignment];
+        [self.cancelButton setContentVerticalAlignment:config.verticalAlignment];
+
         
         //美化iPhone X
         CGFloat height = MM_IS_IPHONE_X ? 33 : 0;
@@ -219,8 +224,11 @@
         self.itemDisableColor   = MMHexColor(0xCCCCCCFF);
         self.itemHighlightColor = MMHexColor(0xE76153FF);
         self.itemPressedColor   = MMHexColor(0xEFEDE7FF);
-        
         self.defaultTextCancel  = @"取消";
+        
+        self.textAlignment      = NSTextAlignmentCenter;
+        self.verticalAlignment  = UIControlContentVerticalAlignmentCenter;
+        self.horizontalAlignment= UIControlContentHorizontalAlignmentCenter;
     }
     
     return self;

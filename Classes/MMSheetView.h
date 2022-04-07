@@ -41,4 +41,9 @@
 
 @property (nonatomic, strong) NSString *defaultTextCancel;  // Default is "取消"
 
+@property (nonatomic, assign) NSTextAlignment textAlignment;  // Default is "Center"
+@property (nonatomic, assign) UIControlContentHorizontalAlignment horizontalAlignment;  // Default is "Center"
+@property (nonatomic, assign) UIControlContentVerticalAlignment verticalAlignment;  // Default is "Center"
+
+
 @end
