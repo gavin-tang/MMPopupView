@@ -61,7 +61,18 @@ UITableViewDataSource
     alertConfig.defaultTextConfirm = @"Confirm";
     
     sheetConfig.defaultTextCancel = @"Cancel";
-    
+    sheetConfig.backgroundColor = [UIColor mm_colorWithHex:0x1C1C1C];
+    sheetConfig.itemNormalColor = UIColor.whiteColor;
+    sheetConfig.itemHighlightColor = UIColor.whiteColor;
+    sheetConfig.itemPressedColor = [UIColor mm_colorWithHex:0x1C1C1C];
+    sheetConfig.itemDisableColor = [UIColor mm_colorWithHex:0x848493];
+    sheetConfig.splitColor = [UIColor mm_colorWithHex:0x2C2C2E];
+    sheetConfig.textAlignment = NSTextAlignmentLeft;
+    sheetConfig.horizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    sheetConfig.innerMargin = 20;
+    sheetConfig.titleFontSize = 16;
+    sheetConfig.buttonHeight = 82;
+    sheetConfig.showCancelButton =false;
     
 }
 
@@ -150,7 +161,7 @@ UITableViewDataSource
               MMItemMake(@"Highlight", MMItemTypeHighlight, block),
               MMItemMake(@"Disabled", MMItemTypeDisabled, block)];
             
-            MMSheetView *sheetView = [[MMSheetView alloc] initWithTitle:@"SheetView"
+            MMSheetView *sheetView = [[MMSheetView alloc] initWithTitle:@""
                                                                   items:items];
             sheetView.attachedView = self.view;
             sheetView.attachedView.mm_dimBackgroundBlurEnabled = NO;
